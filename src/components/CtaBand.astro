@@ -1,0 +1,12 @@
+---
+import { contactEmail } from '../data/empresa';
+---
+<section class="cta-band" aria-label="Contato">
+  <div class="wrap">
+    <h2>Quer ver isso <span class="l" style="font-weight:300;color:var(--acc)">na sua operação?</span></h2>
+    <div class="hero-cta" style="margin:0">
+      <a class="btn btn-amber" href="/#contato">Fale conosco</a>
+      <a class="btn ghost" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+    </div>
+  </div>
+</section>

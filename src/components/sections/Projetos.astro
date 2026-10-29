@@ -1,0 +1,125 @@
+---
+import { Image } from 'astro:assets';
+import Ey from '../Ey.astro';
+import Chevrons from '../Chevrons.astro';
+import SolBlock from '../SolBlock.astro';
+import { projetos, projetoCase } from '../../data/projetos';
+import telaMenu from '../../assets/telas/sindico-menu.jpg';
+import telaAlerta from '../../assets/telas/alerta-bomba.jpg';
+
+interface Props { mode?: 'teaser' | 'full' }
+const { mode = 'full' } = Astro.props;
+const teaser = mode === 'teaser';
+const chev = 'M9 5l7 7-7 7';
+const lit = Math.round(83 / 2);
+---
+<section id="projetos" class="sec">
+  <div class="wrap">
+    <div class="sl">
+      {teaser && (
+        <div class="hd">
+          <Ey>Portfólio de projetos</Ey>
+          <h2 class="r">Cinco projetos, <span class="l">em dois estágios.</span></h2>
+          <p class="lead r">Três entregues e dois em desenvolvimento. Cada um parte da mesma base de identidade, segurança e testes.</p>
+        </div>
+      )}
+      {!teaser && <p class="lead r">Toque em um projeto para ver como funciona, o problema que resolve e os resultados.</p>}
+      <div class="bd">
+        <div class="idx">
+          {projetos.map((p, i) => teaser ? (
+            <a class="row has-ico item r" href={`/projetos#${p.id}`}>
+              <span class="n">{p.n}</span>
+              <span class="ico">{p.icone ? <Image src={p.icone} alt="" width={96} densities={[1, 2, 3]} loading="lazy" /> : <Chevrons />}</span>
+              <b>{p.titulo}</b>
+              <p>{p.resumo}</p>
+              <div class="chips"><span class={p.status}>{p.statusLabel}</span>{p.chips.map((c) => <span>{c}</span>)}</div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={chev}/></svg>
+            </a>
+          ) : (
+            <details class="item r" id={p.id} name="projeto" open={i === 0}>
+              <summary class="row has-ico">
+                <span class="n">{p.n}</span>
+                <span class="ico">{p.icone ? <Image src={p.icone} alt="" width={96} densities={[1, 2, 3]} loading="lazy" /> : <Chevrons />}</span>
+                <b>{p.titulo}</b>
+                <p>{p.resumo}</p>
+                <div class="chips"><span class={p.status}>{p.statusLabel}</span>{p.chips.map((c) => <span>{c}</span>)}</div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={chev}/></svg>
+              </summary>
+              <div class="item-body">
+                <SolBlock h2={p.h2} h2Light={p.h2Light} steps={p.steps} gainsLabel={p.gainsLabel} gains={p.gains}>
+                  {p.id === 'condominio' && (<>
+                    <div class="vh"><span class="live"><i class="blink"></i>Entregue · versão para celular</span><span>Gestor de Condomínio</span></div>
+                    <p class="pb"><b>O problema:</b> a gestão vive espalhada em grupos de WhatsApp, cadernos e planilhas. Pedidos se perdem, reservas dão briga e nada fica registrado.</p>
+                    <div class="phones">
+                      <figure><div class="scr"><Image src={telaMenu} alt="Menu do síndico no celular" width={230} loading="lazy" /></div><figcaption>Menu do síndico</figcaption></figure>
+                      <figure><div class="scr"><Image src={telaAlerta} alt="Alerta de bomba com explicação da IA no celular" width={230} loading="lazy" /></div><figcaption>Alerta de bomba · IA explica</figcaption></figure>
+                    </div>
+                    <div class="chips"><span>Versão para celular</span><span>Assistente com IA</span><span>Exporta relatórios</span></div>
+                    <div class="vf"><div><span>Abertura das telas</span><b class="a">&lt; 1 s</b></div></div>
+                  </>)}
+                  {p.id === 'pesquisas' && (<>
+                    <div class="vh"><span class="live"><i class="blink"></i>Simulação ilustrativa</span><span>Painel do professor</span></div>
+                    <p class="pb"><b>O problema:</b> o acompanhamento acontece em e-mails e planilhas. O atraso é percebido tarde demais, e montar relatórios para a universidade ou órgãos de fomento toma horas.</p>
+                    <div class="sem">
+                      <div><i class="g"></i><b>Aluno A</b><span>Iniciação científica</span><em class="g">Em dia</em></div>
+                      <div><i class="y"></i><b>Aluno B</b><span>TCC</span><em class="y">Atenção</em></div>
+                      <div><i class="g"></i><b>Aluno C</b><span>Estágio</span><em class="g">Em dia</em></div>
+                      <div><i class="rd"></i><b>Aluno D</b><span>Mestrado</span><em class="rd">Atrasado</em></div>
+                    </div>
+                    <div class="chips"><span>Mapa de pesquisas parecidas</span><span>Vários professores</span><span>Dados protegidos</span></div>
+                    <div class="vf"><div><span>Versões</span><b>4</b></div><div><span>Período</span><b>Ago-out 2026</b></div><div><span>Infraestrutura</span><b class="a">Custo zero</b></div></div>
+                  </>)}
+                  {p.id === 'next' && (<>
+                    <div class="vh"><span class="live"><i class="blink"></i>Entregue · uso interno</span><span>Gestão da Next AI</span></div>
+                    <p class="pb"><b>O problema:</b> uma empresa de engenharia precisa controlar clientes, propostas, projetos, faturamento e decisões entre sócios num só lugar.</p>
+                    <div class="meter">
+                      <div class="top"><span>Etapas concluídas</span><b data-c>10/12</b></div>
+                      <div class="seg" aria-hidden="true">{Array.from({ length: 50 }, (_, k) => <i class={k < lit ? 'on' : ''} style={`--n:${k}`}></i>)}</div>
+                      <span class="cap">Pendente: colocar o sistema no ar, em rede pública.</span>
+                    </div>
+                    <div class="chips"><span>Contratação</span><span>Cofre de senhas</span><span>Chat interno</span><span>Assistente de IA por sócio</span></div>
+                    <div class="vf"><div><span>Etapas</span><b>10 de 12</b></div><div><span>Validação</span><b class="a">Sócios</b></div><div><span>Falta</span><b class="w">Colocar no ar</b></div></div>
+                  </>)}
+                  {p.id === 'bombas' && (<>
+                    <div class="vh"><span class="live"><i class="blink" style="background:var(--warn)"></i>Em desenvolvimento</span><span>Condomínios</span></div>
+                    <span class="lbl">Por quê</span>
+                    <div class="big"><b data-c>53%</b><small>dos síndicos</small></div>
+                    <p class="pb" style="margin-top:calc(var(--u)*.8)">apontam a <b>manutenção como o desafio número 1</b>. Bomba d'água parada deixa o prédio sem água em poucas horas, e um motor queimado custa caro.</p>
+                    <span class="lbl">Próximos módulos</span>
+                    <div class="mods">
+                      <div><b>Condomínio</b><span>Financeiro e inadimplência, assembleias digitais com votação online e proteção de dados dos moradores</span></div>
+                      <div><b>Gestor NEXT</b><span>Colocar no ar, anexos e notificações no celular</span></div>
+                    </div>
+                    <div class="vf"><div><span>Também em curso</span><b class="a">Saneamento</b></div><div><span>Formato</span><b>Mestrado</b></div><div><span>Detalhes</span><b>A seguir</b></div></div>
+                  </>)}
+                </SolBlock>
+              </div>
+            </details>
+          ))}
+          <a class="row has-ico item r" href="/case">
+            <span class="n">{projetoCase.n}</span>
+            <span class="ico"><Image src={projetoCase.icone} alt="" width={96} densities={[1, 2, 3]} loading="lazy" /></span>
+            <b>{projetoCase.titulo}</b>
+            <p>{projetoCase.resumo}</p>
+            <div class="chips"><span class="dv">{projetoCase.statusLabel}</span>{projetoCase.chips.map((c) => <span>{c}</span>)}</div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={chev}/></svg>
+          </a>
+        </div>
+        {teaser && <p class="teaser-cta r"><a class="btn" href="/projetos">Ver todos os projetos</a></p>}
+      </div>
+    </div>
+  </div>
+</section>
+<style is:global>
+  .item { display: block; text-decoration: none; color: inherit; }
+  details.item > summary { cursor: pointer; list-style: none; }
+  details.item > summary::-webkit-details-marker { display: none; }
+  details.item > summary svg { transition: transform 0.25s; }
+  details.item[open] > summary svg { transform: rotate(90deg); }
+  details.item[open] > summary { background: var(--surface); }
+  .item-body { padding: calc(var(--u) * 2.4) calc(var(--u) * 1) calc(var(--u) * 3.2); border-bottom: 1px solid var(--line); }
+  a.row.item { display: grid; }
+  @media (max-width: 1000px) {
+    .row.item .chips { grid-column: 2; }
+  }
+</style>

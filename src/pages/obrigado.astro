@@ -1,0 +1,15 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import logoDark from '../assets/logo-dark.png';
+---
+<Base title="Mensagem enviada | Next AI" description="Recebemos a sua mensagem." noindex chrome={false}>
+  <section class="thanks">
+    <div>
+      <Image src={logoDark} alt="Next AI" height={160} />
+      <h1>Mensagem recebida. <span class="l">Respondemos em breve.</span></h1>
+      <p class="lead">Obrigado pelo contato. Retornamos por e-mail assim que possível.</p>
+      <p style="margin-top:32px"><a class="btn" href="/">Voltar ao início</a></p>
+    </div>
+  </section>
+</Base>

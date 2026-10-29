@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/sections/Hero.astro';
+import QuemSomos from '../components/sections/QuemSomos.astro';
+import Socios from '../components/sections/Socios.astro';
+import Metodo from '../components/sections/Metodo.astro';
+import Projetos from '../components/sections/Projetos.astro';
+import CaseSaneamento from '../components/sections/CaseSaneamento.astro';
+import Solucoes from '../components/sections/Solucoes.astro';
+import PorQue from '../components/sections/PorQue.astro';
+import Contato from '../components/sections/Contato.astro';
+---
+<Base
+  title="Next AI | Engenharia & Automação com IA aplicada"
+  description="A Next AI leva inteligência artificial à gestão, ao controle e à tomada de decisão: engenharia, automação, dados e IA para saneamento, condomínios e infraestrutura."
+>
+  <Hero />
+  <QuemSomos />
+  <Socios />
+  <Metodo />
+  <Projetos mode="teaser" />
+  <CaseSaneamento mode="teaser" />
+  <Solucoes mode="teaser" />
+  <PorQue />
+  <Contato />
+</Base>

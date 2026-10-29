@@ -1,0 +1,22 @@
+---
+import Ey from '../Ey.astro';
+import Sculpt from '../Sculpt.astro';
+import { hero } from '../../data/empresa';
+---
+<section id="inicio" class="hero">
+  <div class="sl">
+    <Sculpt id="h" />
+    <div class="hero-text">
+      <Ey>{hero.eyebrow}</Ey>
+      <h1 class="r">{hero.title} <span class="l">{hero.titleLight}</span></h1>
+      <div class="tagl r">{hero.tagline}</div>
+      <div class="hero-cta r">
+        <a class="btn btn-amber" href="#contato">Fale conosco</a>
+        <a class="btn ghost" href="#projetos">Ver projetos</a>
+      </div>
+      <div class="kpis r">
+        {hero.kpis.map((k) => <div><b data-c>{k.n}</b><span>{k.label}</span></div>)}
+      </div>
+    </div>
+  </div>
+</section>

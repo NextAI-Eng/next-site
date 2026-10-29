@@ -1,0 +1,23 @@
+---
+interface Props { id: string }
+const { id } = Astro.props;
+const d = [
+  'M0 0H58L184 111Q193 120 184 130L58 258H0L128 129Z',
+  'M120 0H178L304 111Q313 120 304 130L178 258H120L248 129Z',
+  'M240 0H298L424 111Q433 120 424 130L298 258H240L368 129Z',
+];
+const stops = [['#1B3E9A', '#0A1F55'], ['#2A8FF0', '#0B5FC9'], ['#6FD0FA', '#1E9BE8']];
+---
+<div class="sculpt" aria-hidden="true">
+  <svg viewBox="-20 -20 470 300">
+    <defs>
+      {stops.map(([a, b], k) => (
+        <linearGradient id={`${id}g${k}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color={a}/><stop offset="1" stop-color={b}/></linearGradient>
+      ))}
+      <pattern id={`${id}p`} width="14" height="14" patternUnits="userSpaceOnUse"><rect width="4" height="14" fill="rgba(255,255,255,.16)"/><animateTransform attributeName="patternTransform" type="translate" from="0 0" to="14 0" dur="1.4s" repeatCount="indefinite"/></pattern>
+    </defs>
+    {d.map((p, k) => (
+      <g class="cv" style={`--k:${k}`}><path d={p} fill={`url(#${id}g${k})`}/><path d={p} fill={`url(#${id}p)`}/></g>
+    ))}
+  </svg>
+</div>

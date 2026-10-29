@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Solucoes from '../components/sections/Solucoes.astro';
+---
+<Base
+  title="Soluções de IA para saneamento | Next AI"
+  description="Perdas e vazamentos, bombeamento eficiente, manutenção preditiva, qualidade da água e copiloto da operação: IA aplicada a redes de abastecimento."
+>
+  <PageHero crumb="Soluções" title="IA para saneamento," titleLight="do dado à ação." lead="Seis pontos da rede onde a inteligência artificial já pode ajudar e as cinco soluções que a Next AI propõe para eles." />
+  <div class="page-body"><Solucoes mode="full" /></div>
+  <CtaBand />
+</Base>

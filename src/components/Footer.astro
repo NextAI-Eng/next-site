@@ -1,0 +1,21 @@
+---
+import { Image } from 'astro:assets';
+import logoDark from '../assets/logo-dark.png';
+import logoLight from '../assets/logo-light.png';
+import { contactEmail } from '../data/empresa';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <Image class="logo-dark" src={logoDark} alt="Next AI" height={80} />
+    <Image class="logo-light" src={logoLight} alt="" aria-hidden="true" height={80} />
+    <nav class="foot-nav" aria-label="Páginas"><a href="/projetos">Projetos</a><a href="/case">Case</a><a href="/solucoes">Soluções</a><a href="/#contato">Contato</a></nav>
+    <span>&copy; {year} Next AI Engenharia &amp; Automação</span>
+    <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+  </div>
+</footer>
+<style is:global>
+  .site-footer .logo-light { display: none; }
+  :root[data-deck='light'] .site-footer .logo-dark { display: none; }
+  :root[data-deck='light'] .site-footer .logo-light { display: block; }
+</style>

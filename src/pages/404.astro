@@ -1,0 +1,14 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import logoDark from '../assets/logo-dark.png';
+---
+<Base title="Página não encontrada | Next AI" description="Página não encontrada." noindex chrome={false}>
+  <section class="thanks">
+    <div>
+      <Image src={logoDark} alt="Next AI" height={160} />
+      <h1>Página não encontrada. <span class="l">Vamos voltar ao caminho.</span></h1>
+      <p style="margin-top:32px"><a class="btn" href="/">Ir para o início</a></p>
+    </div>
+  </section>
+</Base>

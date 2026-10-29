@@ -1,0 +1,50 @@
+/* Tokens do deck original; --u deixa de ser escala do palco e vira unidade fixa */
+:root {
+  --u: 13px;
+  --c1: #13307a;
+  --c2: #0b7ce6;
+  --c3: #37b5f2;
+  --bg: #040b18;
+  --bg-2: #071326;
+  --surface: #0b1a33;
+  --surface-2: #0e2140;
+  --ink: #eaf2ff;
+  --ink-2: #a9bcd8;
+  --muted: #8097b8;
+  --line: rgba(120, 170, 255, 0.13);
+  --line-2: rgba(120, 170, 255, 0.28);
+  --acc: #37b5f2;
+  --warn: #ffb547;
+  --ok: #3ddc97;
+  --flow-a: 0.18;
+  --dot: rgba(120, 170, 255, 0.1);
+  --f-d: 'Archivo', 'Arial Narrow', system-ui, sans-serif;
+  --f-m: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --gutter: clamp(16px, 4vw, 56px);
+  --maxw: 1240px;
+  color-scheme: dark;
+}
+
+:root[data-deck='light'] {
+  --bg: #f3f6fb;
+  --bg-2: #ffffff;
+  --surface: #e8eff8;
+  --surface-2: #ffffff;
+  --ink: #061a33;
+  --ink-2: #33475f;
+  --muted: #5b6e87;
+  --line: rgba(6, 26, 51, 0.1);
+  --line-2: rgba(6, 26, 51, 0.22);
+  --acc: #0b5fc9;
+  --warn: #b86200;
+  --ok: #0f8a57;
+  --flow-a: 0.1;
+  --dot: rgba(6, 26, 51, 0.08);
+  color-scheme: light;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --u: 12px;
+  }
+}

@@ -1,0 +1,30 @@
+---
+import Check from './Check.astro';
+interface Props {
+  h2: string;
+  h2Light: string;
+  steps: { t: string; d: string }[];
+  gainsLabel: string;
+  gains: string[];
+}
+const { h2, h2Light, steps, gainsLabel, gains } = Astro.props;
+---
+<div class="sol">
+  <div class="left">
+    <h3 class="r sol-h">{h2} <span class="l">{h2Light}</span></h3>
+    <ol class="steps">
+      {steps.map((s, i) => (
+        <li class="r x"><span class="k"><span>{String(i + 1).padStart(2, '0')}</span></span><div><b>{s.t}</b><p>{s.d}</p></div></li>
+      ))}
+    </ol>
+    <div class="gains r">
+      <span class="lbl">{gainsLabel}</span>
+      <ul>{gains.map((g) => <li><Check />{g}</li>)}</ul>
+    </div>
+  </div>
+  <div class="viz hud r" style="--d:.25s"><slot /></div>
+</div>
+<style is:global>
+  .sol-h { font-family: var(--f-d); font-stretch: 118%; font-weight: 800; letter-spacing: -0.025em; line-height: 1.05; text-wrap: balance; color: var(--ink); font-size: clamp(22px, 2.6vw, 34px); }
+  .sol-h .l { font-weight: 300; color: var(--acc); }
+</style>

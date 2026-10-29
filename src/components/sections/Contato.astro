@@ -1,0 +1,40 @@
+---
+import Ey from '../Ey.astro';
+import Sculpt from '../Sculpt.astro';
+import { contactEmail } from '../../data/empresa';
+---
+<section id="contato" class="sec" style="overflow:hidden;isolation:isolate">
+  <div class="wrap">
+    <div class="sl">
+      <Sculpt id="c" />
+      <div class="contact-grid">
+        <div>
+          <Ey>Próximo passo</Ey>
+          <h2 class="r" style="margin-top:calc(var(--u)*2)">Veja o resultado antes de decidir. <span class="l">Cenários reais, decisão sempre sua.</span></h2>
+          <p class="lead r">Escolhemos juntos o ponto de partida: um setor, um projeto ou uma operação, com resultado medido antes de escalar.</p>
+          <a class="mail r" href={`mailto:${contactEmail}`}>{contactEmail}</a>
+        </div>
+        <form class="form hud r" name="contato" method="POST" action="/obrigado" data-astro-reload data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contato" />
+          <p class="hp" aria-hidden="true"><label>Não preencha este campo <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+          <div class="row2">
+            <div class="field"><label for="f-nome">Nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" required /></div>
+            <div class="field"><label for="f-empresa">Empresa</label><input id="f-empresa" name="empresa" type="text" autocomplete="organization" /></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
+            <div class="field"><label for="f-tel">Telefone</label><input id="f-tel" name="telefone" type="tel" autocomplete="tel" /></div>
+          </div>
+          <div class="field"><label for="f-msg">Como podemos ajudar?</label><textarea id="f-msg" name="mensagem" required></textarea></div>
+          <button class="btn btn-amber" type="submit">Enviar mensagem</button>
+          <p class="note">Usamos seus dados apenas para responder a este contato.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<style is:global>
+  #contato .sculpt { right: -8vw; top: 40%; width: min(40vw, 520px); opacity: 0.5; }
+  @media (max-width: 1000px) { #contato .sculpt { opacity: 0.18; width: 80vw; } }
+  #contato .sl { position: relative; }
+</style>

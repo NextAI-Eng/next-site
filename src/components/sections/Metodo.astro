@@ -1,0 +1,50 @@
+---
+import Ey from '../Ey.astro';
+import sinalSvg from '../../svg/sinal.svg.html?raw';
+import { base, sinal } from '../../data/empresa';
+---
+<section id="metodo" class="sec">
+  <div class="wrap">
+    <div class="sl">
+      <div class="hd">
+        <Ey>Como trabalhamos</Ey>
+        <h2 class="r">Do sinal bruto <span class="l">à decisão na mão do operador.</span></h2>
+      </div>
+      <div class="bd">
+        <div class="chain hud r">
+          <div class="chain-in">
+            <div class="heads">{sinal.map((s) => <div><i>{s.k}</i>{s.t}</div>)}</div>
+            <Fragment set:html={sinalSvg} />
+            <div class="feet">{sinal.map((s) => <p>{s.d}</p>)}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sl">
+      <div class="hd">
+        <Ey>Como construímos</Ey>
+        <h2 class="r">Uma mesma base, <span class="l">cada projeto mais rápido que o anterior.</span></h2>
+      </div>
+      <div class="bd">
+        <div class="duo">
+          <div class="stack">
+            {base.map((c, i) => (
+              <div class={`layer r x${c.top ? ' top' : ''}`} style={`--i:${i};--d:${0.2 + i * 0.12}s`}>
+                <span class="n">{c.n}</span><b>{c.t}</b><span>{c.d}</span>
+              </div>
+            ))}
+          </div>
+          <aside>
+            <p class="r">Todos os projetos partem da <b>mesma base</b>: identidade visual, práticas de segurança e testes automáticos antes de cada entrega.</p>
+            <p class="r">Por isso <b>cada projeto novo começa mais rápido</b> que o anterior.</p>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style is:global>
+  .chain { overflow-x: auto; }
+  .chain-in { min-width: 760px; }
+</style>

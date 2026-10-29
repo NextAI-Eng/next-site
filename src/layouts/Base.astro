@@ -1,0 +1,63 @@
+---
+import '../styles/tokens.css';
+import '../styles/deck.css';
+import '../styles/base.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
+
+interface Props { title: string; description: string; noindex?: boolean; chrome?: boolean }
+const { title, description, noindex = false, chrome = true } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Next AI Engenharia & Automação',
+  url: Astro.site?.toString(),
+  email: 'contato@nextaieng.com',
+  description,
+};
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/og.png', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <ClientRouter />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        try { if (localStorage.getItem('nextai-tema') === 'light') d.setAttribute('data-deck', 'light'); } catch (e) {}
+      })();
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+  </head>
+  <body>
+    <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+    <div class="amb amb-dots" aria-hidden="true"></div>
+    <div class="amb amb-glow" aria-hidden="true"></div>
+    <canvas id="flow" class="amb" aria-hidden="true" transition:persist></canvas>
+    {chrome && <Header />}
+    <main id="conteudo"><slot /></main>
+    {chrome && <Footer />}
+    <script>
+      import '../scripts/site.ts';
+    </script>
+  </body>
+</html>

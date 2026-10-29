@@ -1,0 +1,151 @@
+---
+import { Image } from 'astro:assets';
+import Ey from '../Ey.astro';
+import SolBlock from '../SolBlock.astro';
+import panorama from '../../assets/ilustracoes/case-saneamento.png';
+import esquema from '../../svg/case-esquema.svg.html?raw';
+
+interface Props { mode?: 'teaser' | 'full' }
+const { mode = 'full' } = Astro.props;
+const teaser = mode === 'teaser';
+const seg = (v: number) => Math.round(v / 2);
+const meters = [
+  { t: 'Água potável', v: 99 },
+  { t: 'Coleta e tratamento de esgoto', v: 90 },
+];
+---
+<section id="case" class="sec">
+  <div class="wrap">
+    <div class="sl">
+      <div class="hd">
+        <Ey>Projeto 05 <b>/ 05</b> · Case de saneamento</Ey>
+        <h2 class="r">Do açude <span class="l">até as torneiras de uma cidade paraibana.</span></h2>
+        <p class="lead r">Aplicado como validação de mestrado, junto com a operação de uma companhia de saneamento.</p>
+      </div>
+      <div class="case-pano r">
+        <Image src={panorama} alt="Ilustração isométrica do caminho da água: açude, casa de bombas, tratamento, caixa d'água elevada e a cidade abastecida" widths={[640, 1000, 1400]} sizes="(max-width: 1000px) 100vw, 1128px" loading="lazy" />
+      </div>
+      <div class="case-card hud r">
+        <div class="cc">
+          <span class="cc-k">01 · Desafio</span>
+          <h3>Uma bomba sempre na mesma velocidade</h3>
+          <p>A estação que abastece uma cidade do interior da Paraíba mantém a bomba ligada quase o tempo todo. Quem absorve a variação do consumo da cidade é o nível do reservatório.</p>
+        </div>
+        <div class="cc">
+          <span class="cc-k">02 · Solução</span>
+          <h3>Supervisão Inteligente, em ambiente seguro</h3>
+          <p>Recriamos a estação à parte, com 30 dias de dados reais. Um assistente em português responde dúvidas, simula cenários e avisa por e-mail, Telegram e relatório diário às 7h. A IA nunca muda nada sozinha: o engenheiro aprova.</p>
+        </div>
+        <div class="cc cc-res">
+          <span class="cc-k">03 · Resultados até aqui</span>
+          <div class="res">
+            <div><b data-c>142/142</b><span>perguntas de teste entendidas pelo assistente</span></div>
+            <div><b data-c>11</b><span>formas de representar a bomba comparadas; a mais precisa foi escolhida</span></div>
+            <div><b>4-9×</b><span>mais rápido nos ajustes automáticos que o método anterior</span></div>
+          </div>
+        </div>
+      </div>
+      {teaser && <p class="teaser-cta r"><a class="btn" href="/case">Ver o case completo</a></p>}
+    </div>
+
+    {!teaser && (<>
+<div class="more-body">
+    <div class="sl">
+      <div class="hd">
+        <Ey>Case de saneamento <b>·</b> O momento do setor</Ey>
+        <h2 class="r">Uma rede que cobre o estado <span class="l">e metas claras até 2033.</span></h2>
+      </div>
+      <div class="bd">
+        <div class="ctx">
+          <div class="panel hud r">
+            <span class="lbl">Municípios paraibanos atendidos pela companhia estadual</span>
+            <div class="big"><b data-c>201</b><small>/ 223</small></div>
+            <div class="matrix" aria-hidden="true">{Array.from({ length: 223 }, (_, k) => <i class={k < 201 ? 'on' : ''} style={`--n:${k}`}></i>)}</div>
+          </div>
+          <div class="panel hud r" style="justify-content:center;gap:calc(var(--u)*2.4)">
+            <span class="lbl">Marco Legal do Saneamento · metas para 2033</span>
+            {meters.map((m) => (
+              <div class="meter">
+                <div class="top"><span>{m.t}</span><b data-c>{m.v}%</b></div>
+                <div class="seg" aria-hidden="true">{Array.from({ length: 50 }, (_, k) => <i class={k < seg(m.v) ? 'on' : ''} style={`--n:${k}`}></i>)}</div>
+              </div>
+            ))}
+            <span class="meter cap">Chegar lá exige uma rede mais medida, eficiente e previsível.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sl">
+      <div class="hd">
+        <Ey>Como a estação funciona hoje</Ey>
+      </div>
+      <div class="bd">
+        <div class="schema r scroll-x"><div class="in" style="min-width:680px"><Fragment set:html={esquema} /></div></div>
+        <div class="legend l3">
+          <div class="r"><i>HOJE</i><b>Ligada quase o tempo todo</b><span>A bomba funciona sempre na mesma velocidade.</span></div>
+          <div class="r"><i>QUEM ABSORVE</i><b>O nível do reservatório</b><span>É ele que compensa a variação do consumo da cidade.</span></div>
+          <div class="r"><i>O PROJETO</i><b>Supervisão Inteligente</b><span>Aplicado como validação de mestrado, junto com a operação.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sl">
+      <SolBlock
+        h2="Ambiente seguro,"
+        h2Light="sem mexer na operação real."
+        steps={[
+          { t: 'Reproduzir', d: '30 dias de dados reais, estação recriada à parte' },
+          { t: 'Conversar', d: 'Assistente em português: dúvidas, dados e cenários' },
+          { t: 'Avisar', d: 'E-mail, Telegram, relatório às 7h e painel web' },
+          { t: 'Aprovar', d: 'A IA nunca muda nada sozinha; o engenheiro aprova' },
+        ]}
+        gainsLabel="O assistente também"
+        gains={['Simula cenários', 'Sugere ajustes', 'Identifica leituras estranhas']}
+      >
+        <div class="vh"><span class="live"><i class="blink"></i>Simulação ilustrativa</span><span>Estação de abastecimento</span></div>
+        <div class="chat">
+          <div class="msg op"><span class="who">Engenheiro · Saneamento</span>Como está o reservatório agora? Vale ajustar a bomba?</div>
+          <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="msg ai"><span class="who">Assistente Next AI</span><ol><li>Consultei os dados ao vivo: o nível está dentro da faixa.</li><li>Simulei os cenários e sugiro manter a operação atual.</li><li>A sugestão ficou aguardando a sua aprovação.</li></ol><span class="src">Registrado · nada foi alterado sem aprovação</span></div>
+        </div>
+        <div class="vf"><div><span>Base</span><b>30 dias reais</b></div><div><span>Relatório</span><b>Todo dia, 7h</b></div><div><span>Mudanças</span><b class="a">Com aprovação</b></div></div>
+      </SolBlock>
+    </div>
+
+    <div class="sl">
+      <div class="hd">
+        <Ey>Case de saneamento <b>·</b> Próxima análise</Ey>
+        <h2 class="r">O que vale analisar <span class="l">a seguir, com a equipe de operação.</span></h2>
+      </div>
+      <div class="bd">
+        <div class="panel hud hon r">
+          <span class="lbl">Possibilidade de análise futura</span>
+          <p><b>Eficiência energética do bombeamento.</b> Com a supervisão ligada à estação, dá para estudar onde a energia pode ser mais bem aproveitada.</p>
+          <div class="mods">
+            <div><b>Velocidade</b><span>Avaliar o ajuste da bomba ao consumo da cidade</span></div>
+            <div><b>Horário</b><span>Estudar bombear fora do horário de energia mais cara</span></div>
+            <div><b>Reservatório</b><span>Usar o nível do reservatório como folga, com segurança</span></div>
+          </div>
+          <p>Uma análise a fazer <b>antes de qualquer mudança na operação</b>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sl">
+      <div class="hd">
+        <Ey>Case de saneamento <b>·</b> Como pode crescer</Ey>
+        <h2 class="r">Da simulação à rede, <span class="l">da rede ao produto.</span></h2>
+      </div>
+      <div class="bd">
+        <div class="phases" style="grid-template-columns:1fr 1fr 1fr">
+          <div class="ph r x" style="--k:0"><span class="w">CURTO PRAZO</span><b>Ligar à rede real</b><ul><li>Sair da simulação</li><li>Conectar o sistema aos equipamentos reais</li></ul></div>
+          <div class="ph r x" style="--k:1"><span class="w">MÉDIO PRAZO</span><b>Várias estações</b><ul><li>Supervisionar várias estações juntas</li><li>Prever falhas de bombas</li><li>Estudar bombear fora do horário de energia mais cara</li></ul></div>
+          <div class="ph hot r x" style="--k:2"><span class="w">LONGO PRAZO</span><b>Virar produto</b><ul><li>Para companhias de saneamento, condomínios, indústria e irrigação</li><li>O mesmo núcleo serve a todos</li></ul></div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </>)}
+  </div>
+</section>

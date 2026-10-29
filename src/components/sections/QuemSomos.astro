@@ -1,0 +1,66 @@
+---
+import Ey from '../Ey.astro';
+import Chevrons from '../Chevrons.astro';
+import { camadas, missao, valores } from '../../data/empresa';
+---
+<section id="quem-somos" class="sec">
+  <div class="wrap">
+    <div class="sl">
+      <div class="hd">
+        <Ey>Quem somos</Ey>
+        <h2 class="r">Engenharia de campo, <span class="l">com inteligência artificial por cima.</span></h2>
+      </div>
+      <div class="bd">
+        <div class="duo">
+          <div class="stack">
+            {camadas.map((c, i) => (
+              <div class={`layer r x${c.top ? ' top' : ''}`} style={`--i:${i};--d:${0.2 + i * 0.12}s`}>
+                <span class="n">{c.n}</span><b>{c.t}</b><span>{c.d}</span>
+              </div>
+            ))}
+          </div>
+          <aside>
+            <p class="r">A IA só funciona bem quando está apoiada numa operação <b>bem instrumentada e bem integrada</b>.</p>
+            <p class="r">Por isso a Next AI trabalha nas quatro camadas: do painel elétrico ao modelo que avisa o operador.</p>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <div class="sl">
+      <div class="bd">
+        <div class="sheet">
+          <div class="left">
+            <Ey>Missão</Ey>
+            <h2 class="r" style="margin-top:calc(var(--u)*1.2)">IA confiável, <span class="l">com o ser humano sempre no comando.</span></h2>
+            <p class="r">O que nos move, onde queremos chegar e por que fazemos o que fazemos.</p>
+            <div class="stamp r"><Chevrons />Missão · visão · propósito</div>
+          </div>
+          <dl>
+            {missao.map((m) => <div class="it r x"><dt>{m.t}</dt><dd>{m.d}</dd></div>)}
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="sl">
+      <div class="hd">
+        <Ey>Valores</Ey>
+        <h2 class="r">Quatro valores, <span class="l">cada um com um exemplo real.</span></h2>
+      </div>
+      <div class="bd">
+        <div class="idx">
+          {valores.map((v, i) => (
+            <div class="row r x">
+              <span class="n">{String(i + 1).padStart(2, '0')}</span>
+              <b>{v.t}</b>
+              <p>{v.d}</p>
+              <div class="chips">{v.chips.map((c) => <span>{c}</span>)}</div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import CaseSaneamento from '../components/sections/CaseSaneamento.astro';
+---
+<Base
+  title="Case de saneamento | Supervisão Inteligente | Next AI"
+  description="Como a Next AI recriou uma estação de abastecimento da Paraíba em ambiente seguro, com assistente de IA em português e aprovação sempre humana."
+>
+  <PageHero crumb="Case" title="Case de saneamento:" titleLight="supervisão inteligente com IA." lead="Da captação à cidade abastecida, no interior da Paraíba: contexto do setor, o que construímos, os resultados até aqui e como o projeto pode crescer." />
+  <div class="page-body"><CaseSaneamento mode="full" /></div>
+  <CtaBand />
+</Base>

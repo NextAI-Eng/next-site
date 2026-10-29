@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Projetos from '../components/sections/Projetos.astro';
+---
+<Base
+  title="Projetos | Next AI"
+  description="Cinco projetos da Next AI: gestão de condomínio, de pesquisas e da própria empresa, manutenção de bombas e supervisão inteligente para saneamento."
+>
+  <PageHero crumb="Projetos" title="Cinco projetos," titleLight="em dois estágios." lead="Três entregues e dois em desenvolvimento. Cada um partiu da mesma base de identidade, segurança e testes." />
+  <div class="page-body"><Projetos mode="full" /></div>
+  <CtaBand />
+</Base>

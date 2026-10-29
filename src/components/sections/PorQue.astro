@@ -1,0 +1,24 @@
+---
+import Ey from '../Ey.astro';
+import Chevrons from '../Chevrons.astro';
+import { ficha } from '../../data/empresa';
+---
+<section id="por-que" class="sec">
+  <div class="wrap">
+    <div class="sl">
+      <div class="bd">
+        <div class="sheet">
+          <div class="left">
+            <Ey>Por que a Next AI</Ey>
+            <h2 class="r" style="margin-top:calc(var(--u)*1.2)">IA que se encaixa <span class="l">no que já funciona na operação.</span></h2>
+            <p class="r">Uma ficha técnica do jeito que trabalhamos.</p>
+            <div class="stamp r"><Chevrons />Ficha técnica · Next AI</div>
+          </div>
+          <dl>
+            {ficha.map((f) => <div class="it r x"><dt>{f.t}</dt><dd>{f.d}</dd></div>)}
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

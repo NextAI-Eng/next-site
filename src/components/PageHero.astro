@@ -1,0 +1,14 @@
+---
+import Ey from './Ey.astro';
+interface Props { crumb: string; title: string; titleLight: string; lead?: string }
+const { crumb, title, titleLight, lead } = Astro.props;
+---
+<section class="sec page-hero">
+  <div class="wrap">
+    <div class="sl">
+      <nav class="crumbs r" aria-label="Você está em"><a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">{crumb}</span></nav>
+      <h1 class="r">{title} <span class="l">{titleLight}</span></h1>
+      {lead && <p class="lead r">{lead}</p>}
+    </div>
+  </div>
+</section>

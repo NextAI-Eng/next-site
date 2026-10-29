@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import Ey from '../Ey.astro';
+import Chevrons from '../Chevrons.astro';
+import { socios } from '../../data/socios';
+---
+<section id="socios" class="sec">
+  <div class="wrap">
+    <div class="sl">
+      <div class="hd">
+        <Ey>Sócios</Ey>
+        <h2 class="r">Quatro sócios, <span class="l">cada um com seu foco.</span></h2>
+      </div>
+      <div class="bd">
+        <div class="team">
+          {socios.map((s) => (
+            <div class="mate hud r">
+              <div class="pic"><Image src={s.foto} alt={s.nome} width={480} height={400} widths={[240, 360, 480]} sizes="(max-width: 420px) 90vw, (max-width: 1000px) 45vw, 280px" /></div>
+              <div class="mt">
+                <span class="ar">{s.area}</span>
+                <b>{s.nome}</b>
+                <span class="fm">{s.formacao}</span>
+                <span class="fc">{s.foco}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="stamp r"><Chevrons />Decisões pensadas em conjunto, com a visão de cada área</div>
+      </div>
+    </div>
+  </div>
+</section>

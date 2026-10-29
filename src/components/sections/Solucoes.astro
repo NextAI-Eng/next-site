@@ -1,0 +1,79 @@
+---
+import Ey from '../Ey.astro';
+import SolBlock from '../SolBlock.astro';
+import desafiosSvg from '../../svg/desafios.svg.html?raw';
+import perdas from '../../svg/perdas.svg.html?raw';
+import bombeamento from '../../svg/bombeamento.svg.html?raw';
+import preditiva from '../../svg/preditiva.svg.html?raw';
+import qualidade from '../../svg/qualidade.svg.html?raw';
+import { desafios, solucoes } from '../../data/solucoes';
+
+interface Props { mode?: 'teaser' | 'full' }
+const { mode = 'full' } = Astro.props;
+const teaser = mode === 'teaser';
+const svgs = { perdas, bombeamento, preditiva, qualidade };
+---
+<section id="solucoes" class="sec">
+  <div class="wrap">
+    {!teaser && (
+    <div class="sl">
+      <div class="hd">
+        <Ey>Onde a distribuição perde eficiência</Ey>
+        <h2 class="r">Seis pontos da rede onde <span class="l">a IA já pode ajudar.</span></h2>
+      </div>
+      <div class="bd">
+        <div class="schema r scroll-x"><div class="in" style="min-width:680px"><Fragment set:html={desafiosSvg} /></div></div>
+        <div class="legend">
+          {desafios.map((d) => <div class="r"><i>{d.n}</i><b>{d.t}</b><span>{d.d}</span></div>)}
+        </div>
+      </div>
+    </div>
+    )}
+
+    <div class="sl">
+      <div class="hd">
+        <Ey>Soluções para saneamento</Ey>
+        <h2 class="r">Cinco soluções, <span class="l">um mesmo caminho do dado à ação.</span></h2>
+        <p class="lead r">{teaser ? 'Para redes de água e esgoto: do dado do sensor à ação do operador.' : 'Os gráficos são simulações ilustrativas do que cada solução entrega ao operador.'}</p>
+      </div>
+      <div class="bd">
+        <div class="idx">
+          {solucoes.map((s, i) => teaser ? (
+            <a class="row item r" href={`/solucoes#${s.slug}`}>
+              <span class="n">{s.n}</span>
+              <b>{s.titulo}</b>
+              <p>{s.resumo}</p>
+              <div class="chips">{s.chips.map((c) => <span>{c}</span>)}</div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+            </a>
+          ) : (
+            <details class="item r" id={s.slug} name="solucao" open={i === 0}>
+              <summary class="row">
+                <span class="n">{s.n}</span>
+                <b>{s.titulo}</b>
+                <p>{s.resumo}</p>
+                <div class="chips">{s.chips.map((c) => <span>{c}</span>)}</div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+              </summary>
+              <div class="item-body">
+                <SolBlock h2={s.h2} h2Light={s.h2Light} steps={s.steps} gainsLabel="O cliente ganha" gains={s.gains}>
+                  <div class="vh"><span class="live"><i class="blink"></i>{s.viz.status}</span><span>{s.viz.ctx}</span></div>
+                  {s.viz.kind === 'chart' && s.viz.svg && <Fragment set:html={svgs[s.viz.svg]} />}
+                  {s.viz.kind === 'chat' && s.viz.chat && (
+                    <div class="chat">
+                      <div class="msg op"><span class="who">{s.viz.chat.quem}</span>{s.viz.chat.pergunta}</div>
+                      <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+                      <div class="msg ai"><span class="who">{s.viz.chat.ia}</span><ol>{s.viz.chat.passos.map((p) => <li>{p}</li>)}</ol><span class="src">{s.viz.chat.fonte}</span></div>
+                    </div>
+                  )}
+                  <div class="vf">{s.viz.vf.map((f) => <div><span>{f.l}</span><b class={f.cls ?? ''}>{f.v}</b></div>)}</div>
+                </SolBlock>
+              </div>
+            </details>
+          ))}
+        </div>
+        {teaser && <p class="teaser-cta r"><a class="btn" href="/solucoes">Ver as soluções</a></p>}
+      </div>
+    </div>
+  </div>
+</section>
